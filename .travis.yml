@@ -8,4 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true freeflychi/ops-web-demo:test npm run test -- --coverage
-  
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-2'
+  app: 'react1'
+  env: 'React1-env'
+  bucket_name: 'elasticbeanstalk-eu-west-2-744783829759'
+  bucket_path: 'react1'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY  
